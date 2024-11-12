@@ -3,7 +3,7 @@ from database import Base
 
 
 class Todos(Base):
-    __table__ = "todos"
+    __tablename__ = "todos"
 
     id = Column(Integer, index=True, primary_key=True, autoincrement=True)
     title = Column(String)
