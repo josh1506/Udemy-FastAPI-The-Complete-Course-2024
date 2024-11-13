@@ -1,0 +1,11 @@
+pip install fastapi
+pip install sqlalchemy
+pip install python-multipart
+pip install "python-jose[cryptography]"
+
+# Run application
+uvicorn main:app --reload
+
+# Generate a long random string
+openssl rand -hex 32
+
