@@ -3,6 +3,7 @@ pip install fastapi
 pip install sqlalchemy
 pip install python-multipart
 pip install "python-jose[cryptography]"
+pip install alembic
 
 # Run application
 uvicorn main:app --reload
@@ -10,3 +11,11 @@ uvicorn main:app --reload
 # Generate a long random string
 openssl rand -hex 32
 
+# Database Migrations (Alembic)
+alembic init <filename>
+- Upgrade <filename>.ini sqlalchemy.url
+ - Copy SQLALCHEMY_DATABASE_URL path from database.py and update sqlalchemy.url
+ - Improve fileConfig condition and target_metadata target
+alembic revision -m "Create phone number for user column"
+- Improve upgrade function in alembic/versions/<filename>
+alembic upgrade <alembic version ID>
