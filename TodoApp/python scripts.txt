@@ -19,3 +19,6 @@ alembic init <filename>
 alembic revision -m "Create phone number for user column"
 - Improve upgrade function in alembic/versions/<filename>
 alembic upgrade <alembic version ID>
+-- Downgrade
+alembic downgrade -1
+
