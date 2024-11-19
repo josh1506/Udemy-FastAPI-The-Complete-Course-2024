@@ -6,6 +6,7 @@ from passlib.context import CryptContext
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from starlette import status
+from starlette.staticfiles import PathLike
 
 from database import SessionLocal
 from models import Users
@@ -54,5 +55,16 @@ async def update_user_password(user: user_dependency, db: db_dependency, reset_p
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Authentication failed.")
 
     user_model.hashed_password = bcrypt_context.hash(reset_pass_request.new_password)
+    db.add(user_model)
+    db.commit()
+
+
+@router.put("/phonenumber/{phone_number}", status_code=status.HTTP_204_NO_CONTENT)
+async def change_phone_number(user: user_dependency, db: db_dependency, phone_number: str):
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication failed.")
+
+    user_model = db.query(Users).filter(Users.id == user.get("id")).first()
+    user_model.phone_number = phone_number
     db.add(user_model)
     db.commit()
