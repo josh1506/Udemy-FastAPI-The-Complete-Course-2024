@@ -4,6 +4,8 @@ pip install sqlalchemy
 pip install python-multipart
 pip install "python-jose[cryptography]"
 pip install alembic
+pip install pytest
+pip install httpx
 
 # Run application
 uvicorn main:app --reload
@@ -22,3 +24,6 @@ alembic upgrade <alembic version ID>
 -- Downgrade
 alembic downgrade -1
 
+# Tests
+pytest
+pytest --disable-warnings
