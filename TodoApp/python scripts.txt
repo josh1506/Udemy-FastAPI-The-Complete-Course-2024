@@ -26,4 +26,6 @@ alembic downgrade -1
 
 # Tests
 pytest
-pytest --disable-warnings
+pytest --disable-warnings -s
+- --disable-warnings    # ignore all warnings
+- -s    # show print output
