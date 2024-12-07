@@ -31,3 +31,14 @@ def test_create_access_token(test_user):
     assert payload["sub"] == test_user.username
     assert payload["id"] == test_user.id
     assert payload["role"] == test_user.role
+
+
+@pytest.mark.asyncio
+async def test_get_current_user_valid_token():
+    encode = {"sub": "testuser", "id": 1, "role": "admin"}
+    token = jwt.encode(encode, SECRET_KEY, algorithm=ALGORITHM)
+
+    user = await get_current_user(token)
+    assert user is not None
+    assert user == {"username": "testuser", "id": 1, "role": "admin"}
+
